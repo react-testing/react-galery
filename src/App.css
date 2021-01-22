@@ -1,38 +1,112 @@
-.App {
-  text-align: center;
+*,
+*::before {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  text-rendering: optimizeLegibility;
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background: #fff;
+}
+
+.massory {
+  columns: 4;
+  column-gap: 0;
+  break-inside: avoid;
+}
+
+.massory .img {
+  cursor: pointer;
+  padding: 3px;
+  position: relative;
+}
+.massory > .img img {
+  width: 100%;
+  display: block;
+  filter: grayscale(1) blur(3px);
+  transition: all 0.2s ease;
+}
+
+.massory > .img img.loaded {
+  filter: blur(0);
+}
+
+
+.img .img-figure {
+  position: relative;
+}
+
+.img .img-figure::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: linear-gradient(168deg, transparent, rgba(0, 0, 0, 0.897));
+  z-index: 1;
+}
+
+.img .img-info {
+  position: absolute;
+  font-size: 12px;
+  padding: 0.8rem;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+}
+
+.img .img-info > a {
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.img .img-info > a:hover {
+  text-decoration: underline;
+}
+
+.image-loader {
+  width: 100%;
+  height: 350px;
+  padding: 3px;
+  background: linear-gradient(#eee, rgb(211, 211, 211), #eee);
+  background-size: 1100px;
+  background-clip: content-box;
+  animation: loading 4s linear infinite alternate-reverse;
+}
+
+@keyframes loading {
+  0% {
+    background-position-y: 0;
+  }
+
+  100% {
+    background-position-y: -1000px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media screen and (max-width: 980px) {
+  .massory {
+    columns: 3;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 750px) {
+  .massory {
+    columns: 2;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .massory {
+    columns: 1;
   }
 }

@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import useMounted from "./useMounted";
+import ImageLoader from "./ImageLoader";
+import { image, key } from "./config";
+import { useEffect, lazy, Suspense, useState } from "react";
+import { useVisibilityHook } from 'react-lazyloading';
+
+const fetchData = () =>
+  fetch(image(1), {
+    headers: {
+      Authorization: key,
+    },  
+  });
+
+const ImageLazy = lazy(() => import("./Image"));
 
 function App() {
+  const [images, setImages] = useState([]);
+  const { init, isLoading, isError, data } = useMounted(true);
+
+  useEffect(() => {
+    init(fetchData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    data?.photos && setImages(data.photos);
+  }, [data]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLoading && <p>Loading data...</p>}
+      {isError && <p>A ocurred error</p>}
+      <div className="massory">
+        {images.map((p) => (
+          <Suspense fallback={<ImageLoader />} key={p.id}>
+            <ImageLazy {...p} />
+            {/* <ImageLoader /> */}
+          </Suspense>
+        ))}
+      </div>
+    </>
   );
 }
 
