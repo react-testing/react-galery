@@ -1,15 +1,15 @@
 import "./App.css";
 import useMounted from "./useMounted";
 import ImageLoader from "./ImageLoader";
+import Loader from "./loader";
 import { image, key } from "./config";
 import { useEffect, lazy, Suspense, useState } from "react";
-import { useVisibilityHook } from 'react-lazyloading';
 
 const fetchData = () =>
   fetch(image(1), {
     headers: {
       Authorization: key,
-    },  
+    },
   });
 
 const ImageLazy = lazy(() => import("./Image"));
@@ -29,15 +29,16 @@ function App() {
 
   return (
     <>
-      {isLoading && <p>Loading data...</p>}
+      {isLoading && <Loader />}
       {isError && <p>A ocurred error</p>}
       <div className="massory">
+      
         {images.map((p) => (
           <Suspense fallback={<ImageLoader />} key={p.id}>
             <ImageLazy {...p} />
-            {/* <ImageLoader /> */}
           </Suspense>
         ))}
+        
       </div>
     </>
   );
