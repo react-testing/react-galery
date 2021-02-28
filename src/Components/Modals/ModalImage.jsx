@@ -10,7 +10,7 @@ function ModalImage({ src, toggleOpen }) {
         <button className="modal-close" onClick={toggleOpen}>
           X
         </button>
-        <img src={src} className="modal-img" />
+        <img src={src} className="modal-img" alt="Preview"/>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createRef, useEffect, memo, useState } from "react";
-import lazyLoad from "./LazyLoadImages";
-import ModalImage from "./ModalImage";
+import lazyLoad from "../../Helpers/LazyLoadImages";
+import ModalImage from "../Modals/ModalImage";
 
 function Image({ id, src, photographer_url, photographer }) {
   const ref = createRef(null);
