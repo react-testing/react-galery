@@ -1,16 +1,25 @@
 import { createPortal } from "react-dom";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 
 const container = document.getElementById("modals");
 
-function ModalImage({ src, toggleOpen }) {
+function ModalImage({ src, toggleOpen, isOpen }) {
+  useEffect(() => {
+    function closeModal(e) {
+      if (e.keyCode === 27 && isOpen) toggleOpen();
+    }
+
+    window.addEventListener("keyup", closeModal);
+    return () => window.removeEventListener("keyup", closeModal);
+  }, []);
+
   return (
     <div className="modal-container">
       <div className="modal-wrapper">
         <button className="modal-close" onClick={toggleOpen}>
           X
         </button>
-        <img src={src} className="modal-img" alt="Preview"/>
+        <img src={src} className="modal-img" alt="Preview" />
       </div>
     </div>
   );
