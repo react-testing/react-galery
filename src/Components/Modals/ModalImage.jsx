@@ -11,7 +11,7 @@ function ModalImage({ src, toggleOpen, isOpen }) {
 
     window.addEventListener("keyup", closeModal);
     return () => window.removeEventListener("keyup", closeModal);
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="modal-container">

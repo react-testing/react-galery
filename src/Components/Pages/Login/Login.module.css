@@ -1,0 +1,48 @@
+.login {
+  background: #161822;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  padding: 3.8rem 2.8rem;
+}
+
+.login * {
+  color: #fff;
+}
+
+.group {
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.login input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  padding: 0.8rem;
+  border: 1px solid #252733;
+  border-radius: 5px;
+}
+
+.login .lead {
+  font-size: 90%;
+  color: rgb(189, 189, 189);
+  margin: 1rem 0;
+}
+
+.login button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 0;
+  background: #1687a7;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.login button[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.15rem #1688a748;
+}
