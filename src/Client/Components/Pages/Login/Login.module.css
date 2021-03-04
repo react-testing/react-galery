@@ -15,13 +15,30 @@
   position: relative;
 }
 
+.groupIcon {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 8px;
+}
+
 .login input {
   display: block;
   width: 100%;
-  background: transparent;
+  background: transparent !important;
   padding: 0.8rem;
+  padding-left: 2rem;
   border: 1px solid #252733;
   border-radius: 5px;
+}
+
+.login input:-internal-autofill-selected,
+.login input:-webkit-autofill,
+.login input:-webkit-autofill:hover,
+.login input:-webkit-autofill:focus,
+.login input:-webkit-autofill:active {
+  background-color: transparent !important;
 }
 
 .login .lead {

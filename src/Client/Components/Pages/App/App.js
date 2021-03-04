@@ -8,7 +8,6 @@ const ImageLazy = lazy(() => import("../../Image/Image"));
 
 function App() {
   const { images, isLoading, isError } = useImages();
-  document.body.style.color = "white";
   return (
     <>
       {isLoading && <Loader />}

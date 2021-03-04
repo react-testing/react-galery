@@ -1,4 +1,4 @@
-import { createRef, useEffect, memo, useState } from "react";
+import { createRef, useEffect, memo, useState, useCallback } from "react";
 import lazyLoad from "../../Helpers/LazyLoadImages";
 import ModalImage from "../Modals/ModalImage";
 
@@ -7,9 +7,10 @@ function Image({ id, src, photographer_url, photographer }) {
   const refDiv = createRef(null);
   const [isOpen, setOpen] = useState(false);
 
-  const toggleOpen = () => {
+  const toggleOpen = useCallback(() => {
     setOpen((open) => !open);
-  };
+  }, []);
+  
   useEffect(() => lazyLoad(ref.current), [ref]);
 
   return (
