@@ -15,6 +15,11 @@ body {
   background: #fff;
 }
 
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed !important;
+}
+
 .modal-container {
   display: flex;
   justify-content: center;
@@ -29,27 +34,35 @@ body {
   z-index: 500;
 }
 
-.modal-wrapper{
+.modal-wrapper {
   position: relative;
   width: auto;
 }
 
+.modal-wrapper > img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
 .modal-close {
   position: absolute;
-  right: -38px;
-  top: -45px;
-  font-size: 3rem;
+  right: -6px;
+  top: -51px;
+  font-size: 2rem;
   color: #fff;
   background: transparent;
   outline: none;
   border: 0;
   cursor: pointer;
+  padding: 0.3rem;
 }
 
 .massory {
   columns: 4;
   column-gap: 0;
   break-inside: avoid;
+  margin-bottom: 5rem;
 }
 
 .massory .img {
@@ -59,12 +72,7 @@ body {
 .massory .img img {
   width: 100%;
   display: block;
-  filter: grayscale(1) blur(3px);
   transition: all 0.2s ease;
-}
-
-.massory .img img.loaded {
-  filter: blur(0);
 }
 
 .img .img-figure {
@@ -137,6 +145,17 @@ body {
 @media screen and (max-width: 680px) {
   .massory {
     columns: 1;
+  }
+}
+@media screen and (max-width: 500px) {
+  .modal-close {
+    right: 16px;
+    top: -36px;
+  }
+
+  .modal-wrapper > img {
+    width: 100%;
+    padding: 1rem;
   }
 }
 

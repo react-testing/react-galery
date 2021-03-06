@@ -44,6 +44,7 @@
 .login .lead {
   font-size: 90%;
   color: rgb(189, 189, 189);
+  display: block;
   margin: 1rem 0;
 }
 
@@ -62,4 +63,18 @@
 .login button[type="submit"]:focus {
   outline: none;
   box-shadow: 0 0 0 0.15rem #1688a748;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonContent span {
+  margin-right: 10px;
+}
+
+.buttonContent svg {
+  margin-top: 5px;
 }

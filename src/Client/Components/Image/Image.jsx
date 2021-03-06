@@ -1,37 +1,25 @@
-import { createRef, useEffect, memo, useState, useCallback } from "react";
-import lazyLoad from "../../Helpers/LazyLoadImages";
+import { memo, useState, useCallback } from "react";
 import ModalImage from "../Modals/ModalImage";
 
-function Image({ id, src, photographer_url, photographer }) {
-  const ref = createRef(null);
-  const refDiv = createRef(null);
+function Image({ src }) {
   const [isOpen, setOpen] = useState(false);
-
   const toggleOpen = useCallback(() => {
     setOpen((open) => !open);
   }, []);
-  
-  useEffect(() => lazyLoad(ref.current), [ref]);
 
   return (
     <>
-      <div className="img" ref={refDiv} onClick={toggleOpen}>
+      <div className="img" onClick={toggleOpen}>
         <div className="img-figure">
-          <img
-            src={src.small}
-            ref={ref}
-            data-loaded={src.large}
-            alt={photographer_url}
-            title={photographer_url}
-          />
+          <img src={src} alt={src} loading="lazy"/>
         </div>
         <div className="img-info">
-          <a href={photographer_url} target="_blank" rel="noreferrer">
-            {photographer}
+          <a href={src} target="_blank" rel="noreferrer">
+            Libardo Rengifo
           </a>
         </div>
       </div>
-      <ModalImage src={src.large} toggleOpen={toggleOpen} isOpen={isOpen} />
+      <ModalImage src={src} toggleOpen={toggleOpen} isOpen={isOpen} />
     </>
   );
 }

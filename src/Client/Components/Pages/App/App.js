@@ -8,14 +8,15 @@ const ImageLazy = lazy(() => import("../../Image/Image"));
 
 function App() {
   const { images, isLoading, isError } = useImages();
+  console.log(images)
   return (
     <>
       {isLoading && <Loader />}
       {isError && <p>A ocurred error</p>}
       <div className="massory">
-        {images.map((p) => (
-          <Suspense fallback={<ImageLoader />} key={p.id}>
-            <ImageLazy {...p} />
+        {images.map((src, index) => (
+          <Suspense fallback={<ImageLoader />} key={index}>
+            <ImageLazy src={src} />
           </Suspense>
         ))}
       </div>

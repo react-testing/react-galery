@@ -17,7 +17,7 @@ function ModalImage({ src, toggleOpen, isOpen }) {
     <div className="modal-container">
       <div className="modal-wrapper">
         <button className="modal-close" onClick={toggleOpen}>
-          X
+          ✖
         </button>
         <img src={src} className="modal-img" alt="Preview" />
       </div>

@@ -1,14 +1,19 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-const path = require("path");
+const ENV = process.env;
+const PORT = ENV.API_PORT || 6000;
+const BASE_URL = ENV.API_BASE_URL || `http://localhost:${PORT}/`;
+const accessTokenSecret = ENV.SECRET_TOKEN;
 
 app.use(cors());
+app.use(express.static("./uploads"));
 app.use(bodyParser.json({ extended: true }));
-const accessTokenSecret = "libardojesusrengifo@znareak";
 
 const db = {
   email: "libardo@gmail.com",
@@ -42,11 +47,11 @@ app.post("/login", (req, res) => {
 
 app.get("/images", (req, res) => {
   let filenames = fs.readdirSync("./uploads");
-  filenames = filenames.map((file) => path.resolve(__dirname + "/uploads/" + file));
+  filenames = filenames.map((file) => BASE_URL + file);
   res.status(200);
   res.json({ ok: true, data: filenames });
 });
 
-app.listen(5000, () => {
-  console.log("Servidor iniciado correctamente");
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en ${PORT} correctamente`);
 });
