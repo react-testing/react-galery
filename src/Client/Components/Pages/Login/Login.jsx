@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import { BiUser, BiKey, BiErrorCircle } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useHistory, Link } from "react-router-dom";
+import { setToken } from "../../../Helpers/token";
 
 const cssBody = {
   background: `linear-gradient(140deg, #00000003, #0000009e), url('${bg_login}')`,
@@ -30,7 +31,9 @@ export default function Login() {
   async function handleOnSubmit(e) {
     e.preventDefault();
     const res = await login.mutateAsync(auth);
+
     if (res.ok) {
+      setToken(res.data.token);
       push("/");
     }
   }

@@ -2,13 +2,18 @@ import "../../../Style/App.css";
 import ImageLoader from "../../Loaders/ImageLoader";
 import Loader from "../../Loaders/loader";
 import useImages from "../../Hooks/useImages";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 
 const ImageLazy = lazy(() => import("../../Image/Image"));
 
 function App() {
   const { images, isLoading, isError } = useImages();
-  console.log(images)
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      localStorage.clear();
+    };
+  }, []);
+
   return (
     <>
       {isLoading && <Loader />}
