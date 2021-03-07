@@ -4,6 +4,18 @@ const BASE_URL = process.env.API_BASE_URL || `http://localhost:${PORT}/`;
 const accessTokenSecret = process.env.SECRET_TOKEN;
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, path.join(path.dirname(__dirname), "/uploads"));
+  },
+  filename(req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 const db = {
   email: "libardo@gmail.com",
@@ -42,6 +54,13 @@ router.get("/images", (req, res) => {
   res.json({ ok: true, data: filenames });
 });
 
-router.post("/upload", (req, res) => {});
+router.post("/upload", upload.array("images"), (req, res) => {
+  res.json({
+    ok: true,
+    data: {
+      files: req.files,
+    },
+  });
+});
 
 module.exports = router;

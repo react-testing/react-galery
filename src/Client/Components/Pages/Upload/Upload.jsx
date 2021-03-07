@@ -1,9 +1,22 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import css from "../Style.module.scss";
 import { BiImages } from "react-icons/bi";
 import Btn from "../../Elements/Btn";
+import { uploadImage } from "../../../Helpers/api";
+import ErrorText from "../../Elements/ErrorText";
+
 function Upload() {
-  function handleOnSubmit() {}
+  const [error, setError] = useState(false);
+
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    try {
+      await uploadImage(data);
+    } catch {
+      setError(true);
+    }
+  }
 
   return (
     <div className={css.container}>
@@ -13,7 +26,11 @@ function Upload() {
         <strong>3mb</strong> de peso.
       </p>
 
-      <form autoComplete="off" onSubmit={handleOnSubmit}>
+      <form
+        autoComplete="off"
+        onSubmit={handleOnSubmit}
+        encType="multipart/form-data"
+      >
         <div className={css.group}>
           <BiImages className={css.groupIcon} />
           <input
@@ -26,20 +43,10 @@ function Upload() {
           />
         </div>
 
-        {/* {upload.isError && (
-          <div
-            className={css.group}
-            style={{ display: "flex", alignContent: "center" }}
-          >
-            <BiErrorCircle style={{ fill: "#ff005c" }} />
-            <small>
-              <span style={{ color: "#ff005c", marginLeft: "5px" }}>
-                Ocurrió un error, verifica tus datos.
-              </span>
-            </small>
-          </div>
-        )} */}
-
+        <ErrorText
+          isVisible={error}
+          text="Ocurrió un error, verifica tu conexión."
+        />
         <div className="group">
           <Btn type="submit" disabled={false}>
             <div className={css.buttonContent}>

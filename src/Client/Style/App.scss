@@ -12,12 +12,21 @@
 }
 
 body {
-  background: #fff;
+  background: #161822;
 }
 
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed !important;
+}
+
+.nav {
+  background: #06070a;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  left: 0;
 }
 
 .modal-container {
@@ -118,7 +127,9 @@ button:disabled {
 }
 
 .button {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 0.8rem;
   cursor: pointer;
@@ -127,6 +138,7 @@ button:disabled {
   background: #1687a7;
   font-weight: bold;
   letter-spacing: 1px;
+  color: #fff;
 
   &:focus {
     outline: none;

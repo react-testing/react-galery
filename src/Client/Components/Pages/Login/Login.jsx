@@ -3,11 +3,12 @@ import bg_login from "../../../Images/bg_login.jpg";
 import css from "../Style.module.scss";
 import { useState } from "react";
 import Loader from "react-loader-spinner";
-import { BiUser, BiKey, BiErrorCircle } from "react-icons/bi";
+import { BiUser, BiKey } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useHistory, Link } from "react-router-dom";
 import { setToken } from "../../../Helpers/token";
 import Btn from "../../Elements/Btn";
+import ErrorText from "../../Elements/ErrorText";
 
 const cssBody = {
   background: `linear-gradient(140deg, #00000003, #0000009e), url('${bg_login}')`,
@@ -72,20 +73,10 @@ export default function Login() {
             required
           />
         </div>
-
-        {login.isError && (
-          <div
-            className={css.group}
-            style={{ display: "flex", alignContent: "center" }}
-          >
-            <BiErrorCircle style={{ fill: "#ff005c" }} />
-            <small>
-              <span style={{ color: "#ff005c", marginLeft: "5px" }}>
-                Ocurrió un error, verifica tus datos.
-              </span>
-            </small>
-          </div>
-        )}
+        <ErrorText
+          isVisible={login.isError}
+          text="Ocurrió un error, verifica tus datos."
+        />
 
         <div className="group">
           <Btn type="submit" disabled={login.isLoading}>
