@@ -1,12 +1,13 @@
 import useBody from "../../Hooks/useBody";
 import bg_login from "../../../Images/bg_login.jpg";
-import css from "./Login.module.css";
+import css from "../Style.module.scss";
 import { useState } from "react";
 import Loader from "react-loader-spinner";
 import { BiUser, BiKey, BiErrorCircle } from "react-icons/bi";
 import useAuth from "../../Hooks/useAuth";
 import { useHistory, Link } from "react-router-dom";
 import { setToken } from "../../../Helpers/token";
+import Btn from "../../Elements/Btn";
 
 const cssBody = {
   background: `linear-gradient(140deg, #00000003, #0000009e), url('${bg_login}')`,
@@ -34,12 +35,12 @@ export default function Login() {
 
     if (res.ok) {
       setToken(res.data.token);
-      push("/");
+      push("/home");
     }
   }
 
   return (
-    <div className={css.login}>
+    <div className={css.container}>
       <h2>Inicia Sesión</h2>
       <p className={css.lead}>
         Necesitas tener una cuenta para acceder al contenido de esta página.
@@ -87,14 +88,14 @@ export default function Login() {
         )}
 
         <div className="group">
-          <button type="submit" disabled={login.isLoading}>
+          <Btn type="submit" disabled={login.isLoading}>
             <div className={css.buttonContent}>
               <span>Iniciar</span>
               {login.isLoading && (
                 <Loader height={20} width={20} color="#fff" type="Oval" />
               )}
             </div>
-          </button>
+          </Btn>
           <small className={css.lead} style={{ fontSize: "80%" }}>
             Si no tienes cuenta, puedes crearla <Link to="/signup">aca</Link>.
           </small>
